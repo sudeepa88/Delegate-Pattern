@@ -9,12 +9,14 @@ import UIKit
 
 
 protocol TestProtocol{
-    func testIng()
+    func testIng(n: String) -> String
 }
 
 class ViewController: UIViewController {
     
     var delegate: TestProtocol?
+    let label = UILabel()
+    var textEtc = "Hello, World!"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +25,8 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         // Create and configure the label
     
-        let label = UILabel()
-        label.text = "Hello, World!"
+        //let label = UILabel()
+        label.text = textEtc
         label.font = UIFont.systemFont(ofSize: 24)
         label.textColor = .black
         label.textAlignment = .center
@@ -41,16 +43,7 @@ class ViewController: UIViewController {
         button.layer.cornerRadius = 8
         button.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
-        
-        
-        let button2 = UIButton(type: .system)
-        button2.setTitle("Its Okay", for: .normal)
-        button2.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        button2.setTitleColor(.white, for: .normal)
-        button2.backgroundColor = .red
-        button2.layer.cornerRadius = 8
-        button2.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(button2)
+    
 
         // Set up constraints for label and button
         NSLayoutConstraint.activate([
@@ -63,26 +56,22 @@ class ViewController: UIViewController {
             button.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
             button.widthAnchor.constraint(equalToConstant: 100),
             button.heightAnchor.constraint(equalToConstant: 44),
-            
-            
-            button2.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
-            button2.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            button2.widthAnchor.constraint(equalToConstant: 100),
-            button2.heightAnchor.constraint(equalToConstant: 44)
         ])
 
         // Add target for button action
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        button2.addTarget(self, action: #selector(filledOut), for: .touchUpInside)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        print("transfer data call")
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        //label.text = textEtc
+       
+        print("transfer data call--> ", textEtc)
+        textEtc = delegate?.testIng(n: textEtc ) ?? "Hello, World!"
+        print("Updated Value is-->", textEtc)
+        label.text = textEtc
+    }
     
-
     @objc func buttonTapped() {
         print("Button was tapped!")
         let testVC = TestViewController()
@@ -90,10 +79,6 @@ class ViewController: UIViewController {
         self.navigationController?.pushViewController(testVC, animated: true)
     }
     
-    @objc func filledOut() {
-        print("Filled Out is getting called")
-        delegate?.testIng()
-    }
 }
 
 

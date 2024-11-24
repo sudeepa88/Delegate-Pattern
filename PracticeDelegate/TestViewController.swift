@@ -11,11 +11,6 @@ import UIKit
 
 class TestViewController: UIViewController, TestProtocol{
     
-    
-    
-   
-
-
     let textField = UITextField()
     var newVar = ""
    
@@ -38,7 +33,7 @@ class TestViewController: UIViewController, TestProtocol{
         textField.placeholder = "Enter a number"
         textField.font = UIFont.systemFont(ofSize: 18)
         textField.borderStyle = .roundedRect
-        textField.keyboardType = .numberPad
+        //textField.keyboardType = .numberPad
         textField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(textField)
 
@@ -76,8 +71,11 @@ class TestViewController: UIViewController, TestProtocol{
         print("Submit button was tapped!", textField.text ?? "No Value")
     }
     
-    func testIng() {
-        print("Here it is", newVar)
+    func testIng(n: String) -> String {
+        //var n = n + newVar
+        var n = "Hello, " + newVar + " !"
+        print(n)
+        return n
     }
     
 }
