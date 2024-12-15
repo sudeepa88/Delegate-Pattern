@@ -61,11 +61,11 @@
 				D91F74842CD6760700A18204 /* AppDelegate.swift */,
 				D91F74862CD6760700A18204 /* SceneDelegate.swift */,
 				D91F74882CD6760700A18204 /* ViewController.swift */,
+				D98C90712CD6A60E00B71C4F /* TestViewController.swift */,
 				D91F748A2CD6760700A18204 /* Main.storyboard */,
 				D91F748D2CD6760800A18204 /* Assets.xcassets */,
 				D91F748F2CD6760800A18204 /* LaunchScreen.storyboard */,
 				D91F74922CD6760800A18204 /* Info.plist */,
-				D98C90712CD6A60E00B71C4F /* TestViewController.swift */,
 			);
 			path = PracticeDelegate;
 			sourceTree = "<group>";

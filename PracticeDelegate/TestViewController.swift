@@ -5,39 +5,29 @@
 //  Created by Sudeepa Pal on 02/11/24.
 //
 
+
+
 import UIKit
 
+class TestViewController: UIViewController {
 
-
-class TestViewController: UIViewController, TestProtocol{
-    
     let textField = UITextField()
-    var newVar = ""
-   
-    
-    var exampleViewController = ViewController()
-    
+    var delegate: TestProtocol?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Set the background color
+        // Configure the view
         view.backgroundColor = .white
 
-
-        exampleViewController.delegate = self
-        
-        
-        
-        // Create and configure the text field
-        //let textField = UITextField()
-        textField.placeholder = "Enter a number"
+        // Configure the text field
+        textField.placeholder = "Enter a message"
         textField.font = UIFont.systemFont(ofSize: 18)
         textField.borderStyle = .roundedRect
-        //textField.keyboardType = .numberPad
         textField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(textField)
 
-        // Create and configure the submit button
+        // Configure the submit button
         let submitButton = UIButton(type: .system)
         submitButton.setTitle("Submit", for: .normal)
         submitButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
@@ -47,36 +37,36 @@ class TestViewController: UIViewController, TestProtocol{
         submitButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(submitButton)
 
-        // Set up constraints for textField and submitButton
+        // Set up constraints
         NSLayoutConstraint.activate([
-            // Center the text field horizontally and place it near the center
+            // TextField constraints
             textField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             textField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -30),
             textField.widthAnchor.constraint(equalToConstant: 200),
-
-            // Center the submit button horizontally and place it below the text field
+            
+            // Submit button constraints
             submitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             submitButton.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 20),
             submitButton.widthAnchor.constraint(equalToConstant: 100),
             submitButton.heightAnchor.constraint(equalToConstant: 44)
         ])
-
-        // Add target for the submit button action
+        
+        // Add target for submit button action
         submitButton.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
     }
 
     @objc func submitButtonTapped() {
-        // Handle the submit button action
-        newVar = textField.text ?? "No Value"
-        print("Submit button was tapped!", textField.text ?? "No Value")
-    }
+        
+        let userInput = textField.text ?? "No Value"
+        
+        
+        let updatedText = "Hello, \(userInput)!"
+        print("Submit button tapped with value: \(updatedText)")
+        
     
-    func testIng(n: String) -> String {
-        //var n = n + newVar
-        var n = "Hello, " + newVar + " !"
-        print(n)
-        return n
-    }
+        delegate?.testIng(n: updatedText)
+        
     
+        self.navigationController?.popViewController(animated: true)
+    }
 }
-
